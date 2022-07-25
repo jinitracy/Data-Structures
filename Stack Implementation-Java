@@ -1,0 +1,42 @@
+public class Stack {
+    int[] stack = new int[5];
+    int top=0;
+    public void push(int data){
+        stack[top]=data;
+        top++;    
+    }
+    public void display()
+    {
+        System.out.println("Display");
+        for(int i=0;i<stack.length;i++){
+            System.out.print(stack[i] + " ");
+        }
+        System.out.println("\n");
+    }
+    public int pop(){
+        top--;
+        int val=stack[top];
+        stack[top]=0;
+        return val;
+    }
+    public int peek(){
+        if (top>0){
+        return stack[top-1];
+        }
+        return -1;
+    }
+    
+    public static void main(String[] args){
+        Stack st = new Stack();
+        st.push(10);
+        st.push(20);
+        st.push(30);
+        st.display();
+        st.pop();
+        st.pop();
+        System.out.println("popped " + st.pop());
+        System.out.println("peeked " + st.peek());
+        st.display();
+    }
+    
+}
