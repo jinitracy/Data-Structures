@@ -1,0 +1,93 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package queue.implementation;
+
+/**
+ *
+ * @author 91638
+ */
+public class QueueImplementation {
+    
+        int cap=5;
+        int[] queue=new int[cap];
+        int size,front,rear;
+        
+        public boolean isFull(){
+            return rear==cap;
+        }
+        
+        public boolean isEmpty(){
+            return rear==0;
+        }
+        
+        public int getSize(){
+            return size;
+        }
+        public void enQueue(int data){
+            if(!isFull()){
+            queue[rear]=data;
+            rear=(rear+1)%cap;
+            size++;
+            }
+            else{
+                System.out.println("Queue is full, Can't insert element");
+            }   
+        }
+        public int deQueue(){
+            if(!isEmpty()){
+            int val=queue[front];
+            front=(front+1)%cap; 
+            size--;
+            return val;
+            }
+            else{
+                System.out.println("The queue is empty. Could not delete");
+            }
+           return -1; 
+        }
+        public void show(){
+            System.out.println("Elements in the queue: ");
+            for(int i=0;i<size;i++){
+                System.out.print(queue[(front+i)%cap] + " ");
+            }
+        }
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        
+        
+        // TODO code application logic here
+
+        
+        QueueImplementation q= new QueueImplementation();
+        System.out.println(q.isEmpty());
+        System.out.println(q.isFull());
+        System.out.println(q.getSize());
+        q.enQueue(11);
+        q.enQueue(23); 
+        q.enQueue(17);
+        q.show();
+        System.out.println("");
+        System.out.println("DeQueued element " + q.deQueue());        
+        q.enQueue(32);  
+        q.enQueue(56);
+        q.enQueue(87);        
+        q.show();
+        System.out.println("");
+        System.out.println("DeQueued element " + q.deQueue());
+        System.out.println("");
+        System.out.println("DeQueued element " + q.deQueue());
+        System.out.println("");
+        q.show();
+        System.out.println("");
+        System.out.println(q.isEmpty());
+        System.out.println(q.isFull());
+        System.out.println(q.getSize());
+    }
+    
+}
