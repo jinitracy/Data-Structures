@@ -1,0 +1,212 @@
+public class LinkedList {
+    Node head;
+    LinkedList(){
+        head=null;
+    }
+    class Node{
+        int data;
+        Node next;
+
+        Node(int val){
+            data=val;
+            next=null;
+        }
+    }
+
+    public void InsertAtBeginning(int val){
+        Node newNode = new Node(val);
+        if(head==null){
+            head=newNode;
+        }
+        else{
+            Node temp;
+            temp=head;
+            newNode.next=temp;
+            head=newNode;
+        }
+    }
+
+    public void Display(){
+        Node temp=head;
+        System.out.println("");
+        if(head==null) {
+            System.out.println("Linkedlist is empty");
+            return;
+        }
+        while(temp.next!=null){
+
+           System.out.print(temp.data + "->");
+           temp=temp.next;
+        }
+        System.out.print(temp.data);
+    }
+
+    public void InsertAtPosition(int pos,int val){
+        Node newNode = new Node(3);
+        Node temp=head;
+        if(head==null){
+            InsertAtBeginning(val);
+            return;
+        }
+        for(int i=1;i<pos-1;i++){
+             temp=temp.next;
+        }
+        newNode.next=temp.next;
+        temp.next=newNode;
+        return;
+    }
+
+    public void InsertAtEnd(int val){
+        Node newNode=new Node(val);
+        if(head==null){
+            InsertAtBeginning(val);
+            return;
+        }
+        Node temp=head;
+        while(temp.next!=null){
+            temp=temp.next;
+        }
+        temp.next=newNode;
+
+    }
+
+    public void DeleteAtBeginning(){
+        if(head==null){
+            System.out.println("Can't delete from empty list");
+            return;
+        }
+        Node temp=head;
+        head=temp.next;
+    }
+
+    public void DeleteAtEnd(){
+        Node temp1=head;
+        Node temp2=head;
+
+        while(temp1.next!=null){
+            temp2=temp1;
+            temp1=temp1.next;
+        }
+        temp2.next=null;
+    }
+
+    public void DeleteAtPosition(int pos){
+        Node temp1=head;
+        Node temp2=head;
+        if(head==null){
+            DeleteAtBeginning();
+            return;
+        }
+        for(int i=1;i<pos;i++){
+            temp2=temp1;
+            temp1=temp1.next;
+        }
+        if(temp1.next==null){
+            DeleteAtEnd();
+            return;
+        }
+        temp2.next=temp1.next;
+    }
+    public int length(){
+        Node temp=head;
+        if(head==null) return 0;
+        int i=1;
+        while(temp.next!=null){
+            temp=temp.next;
+            i++;
+        }
+        //System.out.println("Length:" + i);
+        return i;
+    }
+    public int get(int pos){
+        Node temp=head;
+        for(int i=1;i<pos;i++){
+            temp=temp.next;
+        }
+        return temp.data;
+        //System.out.println("Value at the position" + pos + "is" + temp.data);
+    }
+
+    public void update(int pos,int val){
+        Node temp=head;
+        for(int i=1;i<pos;i++){
+            temp=temp.next;
+        }
+        temp.data=val;
+    }
+    
+    public int search(int val){
+        Node temp=head;
+        int i=0;
+        while(temp.next!=null){
+            if(temp.data==val){
+                return i;
+                //System.out.println("The value" + val + "is found at index" + i);
+            }
+            temp=temp.next;
+            i++;
+        }
+        if(temp.data==val){
+            return i;
+            //System.out.println("The value" + val + "is found at index" + i);
+        }
+        System.out.println("Hi from search");
+        return -1;
+        
+    }
+
+    public boolean contains(int val){
+        Node temp=head;
+        while(temp.next!=null){
+            if(temp.data==val){
+                return true;
+                //System.out.println("True");
+            }
+            temp=temp.next;
+        }
+        if(temp.data==val){
+            //System.out.println("True");
+            return true;
+        }
+        else{
+           // System.out.println("False");
+           return false;
+        }
+
+    }
+
+    public static void main(String[] args){
+
+        LinkedList list = new LinkedList();
+        list.Display();
+        System.out.println("Length of the list: " + list.length());
+        list.InsertAtEnd(9);
+        list.Display();
+        list.InsertAtBeginning(5);
+        list.Display();
+        list.InsertAtBeginning(8);
+        list.InsertAtBeginning(55);
+        list.InsertAtBeginning(34);
+        list.Display();
+        list.InsertAtPosition(2,3);
+        list.Display();
+        list.InsertAtEnd(9);
+        list.Display();
+        list.update(2,33);
+        list.Display();
+        list.DeleteAtBeginning();
+        list.Display();
+        list.DeleteAtPosition(5);
+        list.Display();
+        list.DeleteAtEnd();
+        list.Display();
+        System.out.println("");
+        System.out.println("The element is in position:" + list.search(8));
+        System.out.println("The element is in the list:" + list.contains(5));
+        System.out.println("Element at position is:" + list.get(3));
+        list.Display();
+        System.out.println("");
+        System.out.println("Length of the list: " + list.length());
+    }
+    
+}
