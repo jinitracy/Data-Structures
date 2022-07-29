@@ -1,0 +1,148 @@
+//class Doubly LinkedList
+
+public class DLL {
+    Node head;
+    Node tail;
+    DLL(){
+        head=null;
+        tail=null;
+    }
+    public class Node{
+        int data;
+        Node next;
+        Node prev;
+        Node(int val){
+            data =val;
+            next=null;
+            prev=null;
+        }
+    }
+
+//Insert at the beginning
+
+    public void InsertAtBeginning(int val){
+        Node newNode = new Node(val);
+        if(head==null){
+            head=newNode;
+            tail=newNode;
+        }
+        else{
+            head.prev=newNode;
+            newNode.next=head;
+            head=newNode;
+        }
+
+    }
+
+//Insert at End
+
+    public void InsertAtEnd(int val){
+        if(head==null){
+            InsertAtBeginning(val);
+        }
+        Node newNode = new Node(val);
+             tail.next=newNode;
+             newNode.prev=tail;
+             tail=newNode;
+             tail.next=null;
+    }
+
+//Insert at a position
+
+    public void InsertAtPosition(int pos,int val){
+        if(pos==1) InsertAtBeginning(val);
+        else{
+        Node newNode = new Node(val);
+        Node temp=head;
+        Node tempp=null;
+        for(int i=1;i<pos-1;i++){
+           temp=temp.next;
+        }
+        tempp=temp.next;
+        newNode.prev=temp;
+        newNode.next=temp.next;
+        temp.next=newNode;
+        tempp.prev=newNode;
+
+        }
+    }
+//Display
+    public void Display(){
+        Node temp=head;
+        System.out.println("\n");
+        while(temp.next!=null){
+            System.out.print(temp.data + "->");
+            temp=temp.next;
+        }
+        System.out.print(temp.data + " ");
+    }
+//Display in reverse    
+    public void DisplayReverse(){
+        Node temp=tail;
+        System.out.println("\n");
+        while(temp.prev!=null){
+            System.out.print(temp.data + "->");
+            temp=temp.prev;
+        }
+        System.out.print(temp.data + " ");
+    }
+
+//Delete at beginning
+
+    public void DeleteAtBeginning(){
+        Node temp=head;
+        temp=temp.next;
+        temp.prev=null;
+        head=temp;
+    }
+
+//Delete at end
+
+    public void DeleteAtEnd(){
+        Node temp=tail;
+        temp=temp.prev;
+        temp.prev=null;
+        tail=temp;
+        tail.next=null;
+    }
+
+//Delete at a position
+
+    public void DeleteAtPosition(int pos){
+        Node temp=head;
+        for(int i=1;i<pos-1;i++){
+            temp=temp.next;
+        }
+        Node tempp=temp.next;
+        temp.next=tempp.next;
+        tempp=tempp.next;
+        tempp.prev=temp.next;
+    }
+
+    public static void main(String args[]){
+
+        DLL d = new DLL();
+        d.InsertAtBeginning(5);
+        d.InsertAtBeginning(6);
+        d.InsertAtBeginning(53);
+        d.InsertAtBeginning(62);
+        d.InsertAtBeginning(15);
+        d.InsertAtBeginning(56);
+        d.Display();
+        d.DisplayReverse();
+        d.InsertAtEnd(78);
+        d.Display();
+        d.DisplayReverse();
+        d.InsertAtPosition(1,76);
+        d.InsertAtPosition(2,86);
+        d.InsertAtPosition(4,876);
+        d.Display();
+        d.DeleteAtBeginning();
+        d.Display();
+        d.DeleteAtEnd();
+        d.Display();
+        d.DeleteAtPosition(3);
+        d.Display();
+    }
+    
+}
